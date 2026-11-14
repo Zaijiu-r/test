@@ -4,33 +4,7 @@
 
 extern UART_HandleTypeDef huart1;
 
-uint8_t command = 0;
-uint8_t current_mode = 1;
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1)
-		{
-		    HAL_UART_Receive_IT(&huart1,&command,1);
-		}
-}
-void Bluetooth_Init(void)
-{
-   HAL_UART_Receive_IT(&huart1,&command,1);
-}
-
-void Bluetooth_Process(void)
-{
-    if(command == 'M')
-		{
-		   current_mode=1;
-			 command = 'S';
-		}
-		else if (command == 'A')
-		{
-		   current_mode = 0;
-       command = 0; 			
-		}
 		
 		if(current_mode == 1)
 		{
